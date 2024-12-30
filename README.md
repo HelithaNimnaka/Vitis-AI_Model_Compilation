@@ -1,3 +1,4 @@
+
 # Vitis AI Model Compilation and Deployment Guide
 
 This repository provides detailed instructions for downloading, extracting, compiling, and deploying AI models using **Vitis AI** within a Docker environment.
@@ -12,6 +13,7 @@ This repository provides detailed instructions for downloading, extracting, comp
 5. [Finding the `arch.json` File](#finding-the-archjson-file)
 6. [Example Workflow](#example-workflow)
 7. [Notes](#notes)
+8. [Additional Resources](#additional-resources)
 
 ---
 
@@ -34,154 +36,173 @@ Key tools used:
    Start the Vitis AI Docker container:
    ```bash
    docker run -it xilinx/vitis-ai-pytorch-gpu
-Clone the Vitis AI Repository: Clone the official repository to access the model zoo and related tools:
+   ```
 
-bash
-Copy code
-git clone https://github.com/Xilinx/Vitis-AI
-Navigate to the Model Zoo:
+2. **Clone the Vitis AI Repository**:
+   Clone the official repository to access the model zoo and related tools:
+   ```bash
+   git clone https://github.com/Xilinx/Vitis-AI
+   ```
 
-bash
-Copy code
-cd Vitis-AI/model_zoo
-Model Download and Extraction
-Run the Downloader Script: Use downloader.py to list and download available models:
+3. **Navigate to the Model Zoo**:
+   ```bash
+   cd Vitis-AI/model_zoo
+   ```
 
-bash
-Copy code
-python3 downloader.py
-List All Models: Input all to display all available models:
+---
 
-text
-Copy code
-input: all
-Choose a Model: Input the corresponding number from the list. For example:
+## Model Download and Extraction
 
-text
-Copy code
-input num: 1
-This downloads the selected model as a .zip file (e.g., tf_superpoint_3.5.zip).
+1. **Run the Downloader Script**:
+   Use `downloader.py` to list and download available models:
+   ```bash
+   python3 downloader.py
+   ```
 
-Extract the Model: Unzip the downloaded file:
+2. **List All Models**:
+   Input `all` to display all available models:
+   ```text
+   input: all
+   ```
 
-bash
-Copy code
-unzip tf_superpoint_3.5.zip
-Locate the quantized evaluation model:
+3. **Choose a Model**:
+   Input the corresponding number from the list. For example:
+   ```text
+   input num: 1
+   ```
 
-text
-Copy code
-tf_superpoint_3.5/quantized/quantize_eval_model.pb
-Model Compilation
-Locate arch.json: Architecture files required for compilation are preloaded in the Docker container. Navigate to the directory /opt/vitis_ai/compiler/arch:
+   This downloads the selected model as a `.zip` file (e.g., `tf_superpoint_3.5.zip`).
 
-bash
-Copy code
-cd /opt/vitis_ai/compiler/arch
-List the available architecture directories:
+4. **Extract the Model**:
+   Unzip the downloaded file:
+   ```bash
+   unzip tf_superpoint_3.5.zip
+   ```
 
-bash
-Copy code
-ls
-Navigate to the directory for your target platform. For example, for the KV260 platform:
+   Locate the quantized evaluation model:
+   ```text
+   tf_superpoint_3.5/quantized/quantize_eval_model.pb
+   ```
 
-bash
-Copy code
-cd DPUCZDX8G/KV260
-List the contents to locate the arch.json file:
+---
 
-bash
-Copy code
-ls
-Example path:
+## Model Compilation
 
-text
-Copy code
-/opt/vitis_ai/compiler/arch/DPUCZDX8G/KV260/arch.json
-Compile the Model: Use the vai_c_tensorflow command to compile the quantized model. Replace placeholders with actual paths:
+1. **Locate `arch.json`**:
+   Architecture files required for compilation are preloaded in the Docker container. Navigate to the directory `/opt/vitis_ai/compiler/arch`:
 
-bash
-Copy code
-vai_c_tensorflow -f /PATH/TO/quantize_eval_model.pb \
--a /PATH/TO/arch.json \
--o /OUTPUTPATH \
--n netname
-Example for tf_superpoint_3.5 on KV260:
+   ```bash
+   cd /opt/vitis_ai/compiler/arch
+   ```
 
-bash
-Copy code
-vai_c_tensorflow -f Vitis-AI/model_zoo/tf_superpoint_3.5/quantized/quantize_eval_model.pb \
--a /opt/vitis_ai/compiler/arch/DPUCZDX8G/KV260/arch.json \
--o Vitis-AI/model_zoo/tf_superpoint_3.5/Output \
--n superpoint_net
-Verify Compilation: Check the output directory for the compiled .xmodel file:
+   List the available architecture directories:
 
-bash
-Copy code
-ls Vitis-AI/model_zoo/tf_superpoint_3.5/Output
-Finding the arch.json File
+   ```bash
+   ls
+   ```
+
+   Navigate to the directory for your target platform. For example, for the KV260 platform:
+
+   ```bash
+   cd DPUCZDX8G/KV260
+   ```
+
+   List the contents to locate the `arch.json` file:
+
+   ```bash
+   ls
+   ```
+
+   Example path:
+   ```text
+   /opt/vitis_ai/compiler/arch/DPUCZDX8G/KV260/arch.json
+   ```
+
+2. **Compile the Model**:
+   Use the `vai_c_tensorflow` command to compile the quantized model. Replace placeholders with actual paths:
+   ```bash
+   vai_c_tensorflow -f /PATH/TO/quantize_eval_model.pb    -a /PATH/TO/arch.json    -o /OUTPUTPATH    -n netname
+   ```
+
+   Example for `tf_superpoint_3.5` on KV260:
+   ```bash
+   vai_c_tensorflow -f Vitis-AI/model_zoo/tf_superpoint_3.5/quantized/quantize_eval_model.pb    -a /opt/vitis_ai/compiler/arch/DPUCZDX8G/KV260/arch.json    -o Vitis-AI/model_zoo/tf_superpoint_3.5/Output    -n superpoint_net
+   ```
+
+3. **Verify Compilation**:
+   Check the output directory for the compiled `.xmodel` file:
+   ```bash
+   ls Vitis-AI/model_zoo/tf_superpoint_3.5/Output
+   ```
+
+---
+
+## Finding the `arch.json` File
+
 Architecture files are preloaded in the Docker container. Use the following commands to locate them:
 
-Navigate to the architecture directory:
+1. Navigate to the architecture directory:
+   ```bash
+   cd /opt/vitis_ai/compiler/arch
+   ```
 
-bash
-Copy code
-cd /opt/vitis_ai/compiler/arch
-List available DPUs:
+2. List available DPUs:
+   ```bash
+   ls
+   ```
 
-bash
-Copy code
-ls
-For KV260:
+3. For KV260:
+   ```bash
+   cd DPUCZDX8G/KV260
+   ls
+   ```
 
-bash
-Copy code
-cd DPUCZDX8G/KV260
-ls
-The arch.json file for KV260 will be present in this directory.
+   The `arch.json` file for KV260 will be present in this directory.
 
-Example Workflow
-Download and Extract Model:
+---
 
-bash
-Copy code
-cd Vitis-AI/model_zoo
-python3 downloader.py
-unzip tf_superpoint_3.5.zip
-Locate arch.json:
+## Example Workflow
 
-bash
-Copy code
-cd /opt/vitis_ai/compiler/arch/DPUCZDX8G/KV260
-Compile the Model:
+1. **Download and Extract Model**:
+   ```bash
+   cd Vitis-AI/model_zoo
+   python3 downloader.py
+   unzip tf_superpoint_3.5.zip
+   ```
 
-bash
-Copy code
-vai_c_tensorflow -f Vitis-AI/model_zoo/tf_superpoint_3.5/quantized/quantize_eval_model.pb \
--a /opt/vitis_ai/compiler/arch/DPUCZDX8G/KV260/arch.json \
--o Vitis-AI/model_zoo/tf_superpoint_3.5/Output \
--n superpoint_net
-Notes
-Supported Frameworks:
+2. **Locate `arch.json`**:
+   ```bash
+   cd /opt/vitis_ai/compiler/arch/DPUCZDX8G/KV260
+   ```
 
-tf: TensorFlow 1.x
-tf2: TensorFlow 2.x
-cf: Caffe
-dk: Darknet
-pt: PyTorch
-all: Lists all available models.
-Ensure the .xmodel file is present in the output directory after compilation.
+3. **Compile the Model**:
+   ```bash
+   vai_c_tensorflow -f Vitis-AI/model_zoo/tf_superpoint_3.5/quantized/quantize_eval_model.pb    -a /opt/vitis_ai/compiler/arch/DPUCZDX8G/KV260/arch.json    -o Vitis-AI/model_zoo/tf_superpoint_3.5/Output    -n superpoint_net
+   ```
 
-Use the correct arch.json file based on your target platform:
+---
 
-KV260: /opt/vitis_ai/compiler/arch/DPUCZDX8G/KV260/arch.json
-ZCU102: /opt/vitis_ai/compiler/arch/DPUCZDX8G/ZCU102/arch.json
-ZCU104: /opt/vitis_ai/compiler/arch/DPUCZDX8G/ZCU104/arch.json
-Additional Resources
-Vitis AI Documentation
-Vitis AI Model Zoo
-Xilinx KV260 Platform
-python
-Copy code
+## Notes
 
-This version is a complete, standalone Markdown document with all necessary information consolidated.
+1. **Supported Frameworks**:
+   - `tf`: TensorFlow 1.x
+   - `tf2`: TensorFlow 2.x
+   - `cf`: Caffe
+   - `dk`: Darknet
+   - `pt`: PyTorch
+   - `all`: Lists all available models.
+
+2. Ensure the `.xmodel` file is present in the output directory after compilation.
+
+3. Use the correct `arch.json` file based on your target platform:
+   - **KV260**: `/opt/vitis_ai/compiler/arch/DPUCZDX8G/KV260/arch.json`
+   - **ZCU102**: `/opt/vitis_ai/compiler/arch/DPUCZDX8G/ZCU102/arch.json`
+   - **ZCU104**: `/opt/vitis_ai/compiler/arch/DPUCZDX8G/ZCU104/arch.json`
+
+---
+
+## Additional Resources
+
+- [Vitis AI Documentation](https://github.com/Xilinx/Vitis-AI)
+- [Vitis AI Model Zoo](https://github.com/Xilinx/Vitis-AI/tree/master/model_zoo)
+- [Xilinx KV260 Platform](https://www.xilinx.com/products/som/kria/kv260-vision-starter-kit.html)
