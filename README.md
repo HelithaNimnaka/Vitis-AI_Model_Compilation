@@ -31,23 +31,24 @@ Key tools used:
 ---
 
 ## Environment Setup
-1. **Docker Pull Command**
+1. **Docker Pull Command**:  
+   Pull the official Vitis AI Docker image. For more details, visit the [Docker Hub page](https://hub.docker.com/r/xilinx/vitis-ai).
    ```bash
    docker pull xilinx/vitis-ai
    ```
-3. **Run the Vitis AI Docker Image**:
+2. **Run the Vitis AI Docker Image**:
    Start the Vitis AI Docker container:
    ```bash
    docker run -it xilinx/vitis-ai
    ```
 
-4. **Clone the Vitis AI Repository**:
+3. **Clone the Vitis AI Repository**:
    Clone the official repository to access the model zoo and related tools:
    ```bash
    git clone https://github.com/Xilinx/Vitis-AI
    ```
 
-5. **Navigate to the Model Zoo**:
+4. **Navigate to the Model Zoo**:
    ```bash
    cd Vitis-AI/model_zoo
    ```
