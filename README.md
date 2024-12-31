@@ -74,6 +74,12 @@ Key tools used:
    ```text
    input num: 48
    ```
+   Choose Model Type: After selecting the model, choose the model type by inputting the corresponding number. For example:
+   ```text
+   0:all
+   1:GPU
+   2:vek280
+   ```
 
    This downloads the selected model as a `.zip` file (e.g., `tf_superpoint_3.5.zip`).
 
