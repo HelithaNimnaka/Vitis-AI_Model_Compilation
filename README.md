@@ -74,7 +74,8 @@ Key tools used:
    ```text
    input num: 48
    ```
-   Choose Model Type: After selecting the model, choose the model type by inputting the corresponding number. For example:
+4. **Choose Model Type**:
+   After selecting the model, choose the model type by inputting the corresponding number. For example:
    ```text
    0:all
    1:GPU
@@ -83,7 +84,7 @@ Key tools used:
 
    This downloads the selected model as a `.zip` file (e.g., `tf_superpoint_3.5.zip`).
 
-4. **Extract the Model**:
+5. **Extract the Model**:
    Unzip the downloaded file:
    ```bash
    unzip tf_superpoint_3.5.zip
