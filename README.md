@@ -72,7 +72,7 @@ Key tools used:
 3. **Choose a Model**:
    Input the corresponding number from the list. For example:
    ```text
-   input num: 1
+   input num: 48
    ```
 
    This downloads the selected model as a `.zip` file (e.g., `tf_superpoint_3.5.zip`).
