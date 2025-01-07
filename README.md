@@ -47,8 +47,13 @@ Key tools used:
    ```bash
    git clone https://github.com/Xilinx/Vitis-AI
    ```
+   For a specified version:
+   ```bash
+   git clone --branch v3.0 --single-branch https://github.com/Xilinx/Vitis-AI.git
+   ```
+   
 
-4. **Navigate to the Model Zoo**:
+5. **Navigate to the Model Zoo**:
    ```bash
    cd Vitis-AI/model_zoo
    ```
