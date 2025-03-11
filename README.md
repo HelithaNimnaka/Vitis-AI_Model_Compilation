@@ -1,3 +1,6 @@
+We have created a [PTQ script](PTQ_Quantization_Script_Superpoint.py) for the pre-trained SuperPoint model available [here](https://github.com/eric-yyjau/pytorch-superpoint/tree/master).
+
+---
 
 # Vitis AI Model Compilation and Deployment Guide
 
