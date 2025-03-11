@@ -1,4 +1,4 @@
-We have created a [PTQ script](PTQ_Quantization_Script_Superpoint.py) for the pre-trained SuperPoint model available [here](https://github.com/eric-yyjau/pytorch-superpoint/tree/master).
+We have created a [PTQ and compile script](PTQ_Quantization_Script_Superpoint.py) for the pre-trained SuperPoint model available [here](https://github.com/eric-yyjau/pytorch-superpoint/tree/master) for the AMD Xilinx Kria KR260 Robotics Starter Kit, and the target DPU used is DPUCZDX8G.
 
 ---
 
