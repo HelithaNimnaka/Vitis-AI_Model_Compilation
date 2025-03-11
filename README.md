@@ -36,6 +36,8 @@ Key tools used:
    ```bash
    docker pull xilinx/vitis-ai
    ```
+   We recommend using a GPU-enabled Docker. Installation instructions are provided [xilinx.github.io/Vitis-AI](https://xilinx.github.io/Vitis-AI/3.0/html/docs/install/install.html).
+   
 2. **Run the Vitis AI Docker Image**:
    Start the Vitis AI Docker container:
    ```bash
