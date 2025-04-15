@@ -44,7 +44,7 @@ Key tools used:
 2. **Run the Vitis AI Docker Image**:
    Start the Vitis AI Docker container:
    ```bash
-   docker run -it xilinx/vitis-ai
+   docker run -it --rm -v "$(pwd)":/workspace -w /workspace --gpus all xilinx/vitis-ai-pytorch-gpu:3.5.0.001-1eed93cde bash
    ```
 
 3. **Clone the Vitis AI Repository**:
